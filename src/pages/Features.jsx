@@ -18,7 +18,7 @@ export default function Features() {
       <Trust />
       <ModuleOrbit />
       <FinalCTA title="Eleven capabilities. One demo." text="Pick the workflows that matter to your clinic and we'll walk through those first."
-        secondary={{ href: '/for-your-team', label: 'See Who Uses What' }} />
+        secondary={{ href: '/for-admin-team', label: 'See Who Uses What' }} />
     </>
   );
 }

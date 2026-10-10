@@ -32,7 +32,7 @@ export default function Navbar() {
           <Logo />
           <nav aria-label="Primary">
             <ul className="nav-links">
-              {NAV.map((l) => <li key={l.href}><NavLink to={l.href}>{l.label}</NavLink></li>)}
+              {NAV.map((l) => <li key={l.href}><NavLink to={l.href} end={l.href === '/'}>{l.label}</NavLink></li>)}
             </ul>
           </nav>
           <div className="nav-cta"><Link className="btn btn-primary" to="/book-demo">Book a Demo</Link></div>
@@ -48,7 +48,7 @@ export default function Navbar() {
             <Logo size="sm" />
             <button className="drawer-close" type="button" aria-label="Close menu" onClick={() => setOpen(false)}>×</button>
           </div>
-          {NAV.map((l, i) => <NavLink key={l.href} to={l.href} ref={i === 0 ? firstLinkRef : undefined}>{l.label}</NavLink>)}
+          {NAV.map((l, i) => <NavLink key={l.href} to={l.href} end={l.href === '/'} ref={i === 0 ? firstLinkRef : undefined}>{l.label}</NavLink>)}
           <Link className="btn btn-primary" to="/book-demo">Book a Demo</Link>
         </div>
       </div>

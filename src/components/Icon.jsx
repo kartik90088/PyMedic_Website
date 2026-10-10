@@ -20,6 +20,8 @@ const ICONS = {
   check: <path d="M5 12.5l4.5 4.5L19 7.5" {...P} strokeWidth={2.5} />,
   menu: <path d="M3 6h18M3 12h18M3 18h18" {...P} />,
   play: <path d="M7 4l13 8-13 8z" fill="currentColor" />,
+  pill: <><rect x="3.5" y="8.5" width="17" height="7" rx="3.5" transform="rotate(-45 12 12)" {...P} /><path d="M9.5 9.5l5 5" {...P} /></>,
+  spark: <path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM18.5 15.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z" {...P} />,
   globe: <><circle cx="12" cy="12" r="8.5" {...P} /><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17" {...P} /></>,
   mail: <><rect x="3" y="5.5" width="18" height="13" rx="2.5" {...P} /><path d="M3.5 7l8.5 6 8.5-6" {...P} /></>,
   phone: <path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A15.5 15.5 0 0 1 4.5 5.5a2 2 0 0 1 2-2z" {...P} />,

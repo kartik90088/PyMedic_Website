@@ -9,7 +9,7 @@ export default function ProductScreenshot({ title, src, alt, sample = true, chil
       <div className="bar">
         <span className="dots"><i /><i /><i /></span>
         <span className="addr">{title}</span>
-        {sample && !src && <span className="live"><i aria-hidden="true" />Live · sample data</span>}
+        {sample && !src && <span className="live live-dot" aria-hidden="true"><i /></span>}
       </div>
       {src ? (
         <img src={src} alt={alt || title} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto' }} />

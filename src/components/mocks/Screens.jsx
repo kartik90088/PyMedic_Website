@@ -25,35 +25,63 @@ const Vitals = ({ items }) => (
   <div className="vit">{items.map(([k, v]) => <div key={k}><small>{k}</small><b>{v}</b></div>)}</div>
 );
 
-const TV_UP = ['#7 · #8 · #9 · #15 · #4', '#8 · #9 · #10 · #15 · #4', '#9 · #10 · #11 · #16 · #5', '#10 · #11 · #12 · #16 · #5'];
+const TV_UP = [['#7', '#8', '#9', '#15', '#4'], ['#8', '#9', '#10', '#15', '#4'], ['#9', '#10', '#11', '#16', '#5'], ['#10', '#11', '#12', '#16', '#5']];
+const TV_DOCS = [['Dr. Sharma', 'General medicine · Room 2'], ['Dr. Iyer', 'Orthopaedics · Room 3'], ['Dr. Rao', 'Paediatrics · Room 5']];
 const Tv = ({ live, compact }) => {
   const t = useTick(4, 2600);
   const fixed = live !== undefined;
-  const a = fixed ? live : `#${6 + t}`;
+  const nums = [fixed ? live : `#${6 + t}`, `#${14 + (fixed ? 0 : t >> 1)}`, `#${3 + (fixed ? 0 : (t === 3 ? 1 : 0))}`];
   return (
-    <div className="tv" style={compact ? { padding: 12 } : undefined}>
-      {!compact && <div className="tv-head"><AppBrand light /><span>City Care Clinic · OPD</span><span className="live"><i aria-hidden="true" />Live</span></div>}
+    <div className={`tv${compact ? ' tv-compact' : ''}`}>
+      {!compact && (
+        <div className="tv-head">
+          <span className="tv-brand"><AppBrand light /><span className="tv-sep" aria-hidden="true" />City Care Clinic · OPD</span>
+          <span className="tv-livebadge"><i aria-hidden="true" />Live</span>
+        </div>
+      )}
+      {!compact && <p className="tv-label">Now serving</p>}
       <div className="tv-grid">
-        <div className="tv-cell live"><small>Dr. Sharma · Room 2</small><b key={a} className="pop">{a}</b></div>
-        <div className="tv-cell"><small>Dr. Iyer · Room 3</small><b key={t >> 1} className="pop">#{14 + (fixed ? 0 : t >> 1)}</b></div>
-        <div className="tv-cell"><small>Dr. Rao · Room 5</small><b key={t === 3 ? 1 : 0} className="pop">#{3 + (fixed ? 0 : (t === 3 ? 1 : 0))}</b></div>
+        {TV_DOCS.map(([d, room], i) => (
+          <div key={d} className={`tv-cell${i === 0 ? ' on' : ''}`}>
+            <small>{d}</small>
+            {!compact && <span className="tv-room">{room}</span>}
+            <b key={nums[i]} className="pop">{nums[i]}</b>
+            {!compact && i === 0 && <span className="tv-go">Please proceed</span>}
+          </div>
+        ))}
       </div>
-      {!compact && <div style={{ fontSize: 13, color: '#9FB6E0' }}>Up next: <b key={t} className="pop" style={{ color: '#fff' }}>{TV_UP[t]}</b></div>}
+      {!compact && (
+        <div className="tv-next">
+          <span>Up next</span>
+          <div key={t} className="tv-chips">{TV_UP[t].map((n, i) => <i key={n} className="pop" style={{ animationDelay: `${i * 60}ms` }}>{n}</i>)}</div>
+          <span className="tv-wait">Avg wait · {9 - t} min</span>
+        </div>
+      )}
     </div>
   );
 };
 
 /* ---------- Multi-tenant diagram: platform layer + isolated clinic workspaces ---------- */
 export function TenancyDiagram({ clinics = ['Your clinic', 'Clinic B', 'Clinic C'] }) {
+  const shared = [['rx', 'Medicine database'], ['clock', 'Test catalogue'], ['chat', 'WhatsApp gateway'], ['bill', 'Payments']];
+  const own = [['desk', 'Patients'], ['steth', 'Doctors'], ['bill', 'Invoices'], ['chat', 'WhatsApp number']];
   return (
     <div className="iso" aria-label="Each clinic's data is kept separate on the shared PyMedic platform">
       <div className="plat">
-        <MarkTile />
-        <div><b>PyMedic platform</b><small>Shared: medicine database, test catalogue, WhatsApp gateway, payments</small></div>
+        <div className="plat-top">
+          <MarkTile />
+          <div><b>PyMedic platform</b><small>Shared by every clinic</small></div>
+        </div>
+        <ul className="plat-shared">{shared.map(([ic, l]) => <li key={l}><Icon name={ic} size={15} />{l}</li>)}</ul>
       </div>
+      <div className="iso-links" aria-hidden="true"><i /><i /><i /></div>
       <div className="cl">
-        {clinics.map((c) => (
-          <div key={c}><span className="lock"><Icon name="lock" size={13} />Private</span><b>{c}</b><small>Patients, doctors, invoices, WhatsApp</small></div>
+        {clinics.map((c, i) => (
+          <div key={c} style={{ animationDelay: `${0.15 + i * 0.12}s` }}>
+            <span className="lock"><Icon name="lock" size={14} />Private</span>
+            <b>{c}</b>
+            <ul>{own.map(([ic, l]) => <li key={l}><Icon name={ic} size={14} />{l}</li>)}</ul>
+          </div>
         ))}
       </div>
     </div>
@@ -175,7 +203,7 @@ export const CONSULT_SCREENS = [
 const Meter = ({ pct, label }) => (
   <>
     <div className="meter"><i style={{ width: `${pct}%` }} /></div>
-    <small key={label} className="pop" style={{ color: pct >= 75 ? 'var(--warn)' : 'var(--muted)', display: 'block' }}>{label}</small>
+    <div className="meter-label" style={{ color: pct >= 75 ? 'var(--warn)' : 'var(--muted)' }}><span>{label}</span><b>{pct}%</b></div>
   </>
 );
 
@@ -183,11 +211,25 @@ function AppointmentsScreen() {
   const t = useTick(4, 2200);
   const booked = [['9:00', 'x'], ['9:20', t >= 2 ? 'x' : ''], ['9:40', 'x'], ['10:00', t >= 3 ? 'x' : ''], ['10:20', 'x'], ['10:40', t >= 1 ? 'x' : 'sel'], ['11:00', t >= 1 ? 'sel' : ''], ['11:20', '']];
   const via = [['Online', 0], ['Walk-in', 1], ['Referral', 2], ['Follow-up', 3]];
+  const recent = [
+    ['#6', 'Priya R.', '10:40 · Online booking', 'Confirmed', 'p-ok'],
+    ['#7', 'Arjun M.', '11:00 · Walk-in', t >= 1 ? 'Booked' : 'Holding', t >= 1 ? 'p-blue' : 'p-warn'],
+    ['#8', 'Fatima K.', '11:20 · Referral · Dr. Iyer', 'Booked', 'p-blue'],
+  ];
+  const free = [4, 3, 2, 1][t];
   return (
     <div className="app-main">
+      <div className="stats three">
+        <div className="card stat"><b key={`b${t}`} className="pop">{14 + t}</b><small>Booked today</small></div>
+        <div className="card stat"><b key={`f${t}`} className="pop">{free}</b><small>Free slots</small></div>
+        <div className="card stat"><b>1</b><small>No-show</small></div>
+      </div>
       <div className="card"><h5>Weekly hours</h5>Mon–Fri · 9:00 AM – 1:00 PM · 20 min</div>
       <div className="card"><h5>Tuesday slots</h5>
         <div className="slots">{booked.map(([time, c]) => <span key={time} className={c || undefined}>{time}</span>)}</div>
+      </div>
+      <div className="card"><h5>Latest bookings</h5>
+        {recent.map(([tok, name, sub, pill, tone]) => <Row key={name} tok={tok} name={name} sub={sub} pill={pill} tone={tone} />)}
       </div>
       <div className="card"><h5>Booked via</h5>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
@@ -216,7 +258,7 @@ export const RX_MEERA = { doctor: 'Dr. Iyer', patient: 'Meera N. · 45 F · Toke
 export const RX_ARJUN = { doctor: 'Dr. Sharma', patient: 'Arjun M. · 32 M · Token #7', lines: ['Paracetamol 500 mg · 1-0-1 · 5 days · after food', 'Cetirizine 10 mg · 0-0-1 · 5 days', 'Multivitamin · 1-0-0 · 10 days', 'Tests: CBC · Follow-up: Tue 14 Oct'] };
 
 export const RX_PRIYA = { doctor: 'Dr. Sharma', patient: 'Priya R. · 38 F · Token #9', lines: ['Pantoprazole 40 mg · 1-0-0 · 14 days · before breakfast', 'Ondansetron 4 mg · 1-0-1 · 5 days · if nausea', 'Tests: Ultrasound abdomen · LFT', 'Surgery suggested: laparoscopic cholecystectomy · Follow-up: Fri 24 Oct'],
-  statuses: [[['p-mute', 'Completing…']], [['p-ok', '✓ Sent to WhatsApp']], [['p-ok', '✓ Sent to WhatsApp'], ['p-warn', 'Counselling case C-22 opened']], [['p-ok', '✓ Sent to WhatsApp'], ['p-warn', 'Counselling case C-22 opened'], ['p-blue', 'Invoice CONS-0152 created']]] };
+  statuses: [[['p-mute', 'Completing…']], [['p-ok', '✓ Sent to WhatsApp']], [['p-ok', '✓ Sent to WhatsApp'], ['p-warn', 'Counselling case C-22 opened']], [['p-ok', '✓ Sent to WhatsApp'], ['p-warn', 'Counselling case C-22 opened'], ['p-blue', 'Invoice CONS-0152 created']], [['p-ok', '✓ Sent to WhatsApp'], ['p-warn', 'Counselling case C-22 opened'], ['p-blue', 'Invoice CONS-0152 created'], ['p-mute', 'ABHA linking via ABDM · coming soon']]] };
 
 const RX_STATUS = [[['p-mute', 'Generating PDF…']], [['p-ok', '✓ Sent to WhatsApp']], [['p-ok', '✓ Sent to WhatsApp'], ['p-blue', 'In patient portal']]];
 
@@ -271,12 +313,16 @@ function SurgeryScreen() {
   ];
   return (
     <div className="app-main">
-      <div className="card"><h5>Priya R. · minor procedure</h5>
+      <div className="card"><Row tok="C-21" now name="Priya R. · 38 F" sub="Referred by Dr. Sharma · laparoscopic cholecystectomy" pill="Counselling" tone="p-blue" /></div>
+      <div className="card"><h5>Counselling checklist</h5>
         <div className="steps-mini">
           {steps.map(([l, st, tone, pill]) => <div key={l}><i className={st || undefined} /><span>{l}</span><span key={pill} className={`pill ${tone} pop`}>{pill}</span></div>)}
         </div>
       </div>
-      <div className="sent"><span className={`pill ${t >= 3 ? 'p-ok' : 'p-mute'}`}>{t >= 3 ? '✓ Surgery scheduled · Thu 16 Oct' : 'Awaiting decision'}</span></div>
+      <div className="card"><h5>Package · ₹45,000</h5>
+        <div className="vit">{[['Room', '₹12,000'], ['Surgeon', '₹18,000'], ['Anaesthesia', '₹8,000'], ['Tests', '₹7,000']].map(([k, v]) => <div key={k}><small>{k}</small><b>{v}</b></div>)}</div>
+      </div>
+      <div className="sent"><span key={t} className={`pill ${t >= 3 ? 'p-ok' : 'p-mute'} pop`}>{t >= 3 ? '✓ Surgery scheduled · Thu 16 Oct' : 'Awaiting decision'}</span></div>
     </div>
   );
 }
@@ -293,7 +339,16 @@ function WhatsAppScreen() {
   const day = [['Day 3 sent', 'p-ok'], [t >= 2 ? 'Day 7 sent' : 'Day 7 scheduled', t >= 2 ? 'p-ok' : 'p-blue'], [t >= 3 ? 'Day 14 scheduled' : 'Day 14', t >= 3 ? 'p-blue' : 'p-mute']];
   return (
     <div className="app-main">
-      <div className="card">{rows.map(([tok, name, sub, pill, tone]) => <Row key={name} tok={tok} name={name} sub={sub} pill={pill} tone={tone} />)}</div>
+      <div className="stats three">
+        <div className="card stat"><b key={`s${t}`} className="pop">{126 + t * 3}</b><small>Sent today</small></div>
+        <div className="card stat"><b>98%</b><small>Delivered</small></div>
+        <div className="card stat"><b key={`r${t}`} className="pop">{t === 0 ? 1 : 2}</b><small>Need reply</small></div>
+      </div>
+      <div className="card"><h5>Inbox</h5>{rows.map(([tok, name, sub, pill, tone]) => <Row key={name} tok={tok} name={name} sub={sub} pill={pill} tone={tone} />)}</div>
+      <div className="card wa-thread"><h5>Priya R. · conversation</h5>
+        <div className="bub">Is the lipid test fasting?<small>10:42</small></div>
+        <div className="bub me">Yes, please fast for 10–12 hours before the test.<small>10:44 ✓✓</small></div>
+      </div>
       <div className="card"><h5>Follow-up sequence</h5>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>{day.map(([l, c]) => <span key={l} className={`pill ${c} pop`}>{l}</span>)}</div>
       </div>
@@ -305,15 +360,26 @@ const INVOICES = [['CONS-0147', 'Consultation · ₹500'], ['DIAG-0089', 'Lipid 
 function BillingScreen() {
   const t = useTick(4, 2000);
   const pct = [62, 70, 78, 78][t];
+  const collected = [16250, 16750, 17550, 17970][t];
   return (
     <div className="app-main">
+      <div className="stats three">
+        <div className="card stat"><b key={collected} className="pop">₹{collected.toLocaleString('en-IN')}</b><small>Collected today</small></div>
+        <div className="card stat"><b key={`i${t}`} className="pop">{39 + t}</b><small>Invoices today</small></div>
+        <div className="card stat"><b>₹6,200</b><small>Outstanding</small></div>
+      </div>
       <div className="streams">
         {INVOICES.map(([n, sub], i) => (
           <div key={n} className={`stream${i > t ? ' pending' : ''}`}><b>{i > t ? 'Pending…' : n}</b><small>{sub}</small>{i <= t && <span key={n} className="pill p-ok pop">Generated</span>}</div>
         ))}
       </div>
       <div className="card"><h5>Corporate partner · monthly credit</h5>
-        <Meter pct={pct} label={`${pct}% used${pct >= 75 ? ' · admin alerted' : ''}`} />
+        <Meter pct={pct} label={pct >= 75 ? 'Used · admin alerted' : 'Used of ₹5,00,000'} />
+      </div>
+      <div className="card"><h5>Recent payments</h5>
+        <Row tok="UPI" name="Priya R." sub="CONS-0147 · consultation" pill="₹500" tone="p-ok" />
+        <Row tok="CARD" name="Arjun M." sub="DIAG-0089 · lipid profile" pill="₹800" tone="p-ok" />
+        <Row tok="CORP" name="Karan V." sub="Billed to Nimbus Technologies" pill="₹400" tone="p-blue" />
       </div>
     </div>
   );
@@ -349,6 +415,7 @@ const STAGES = ['New', 'Contacted', 'Interested', 'Negotiation', 'Converted'];
 function LeadFlowScreen() {
   const t = useTick(5, 2000);
   const base = [['Website form', 'WhatsApp'], ['Phone call'], ['Health checkup'], ['Corporate'], ['New patient']];
+  const touch = [['Walk-in enquiry', 'Mon 10:12'], ['WhatsApp: health checkup price', 'Mon 14:40'], ['Call back · interested', 'Tue 11:05'], ['Package offer sent', 'Wed 09:30'], ['Booked · converted to patient', 'Thu 12:15']];
   return (
     <div className="app-main">
       <div className="pipe">
@@ -358,6 +425,11 @@ function LeadFlowScreen() {
             {base[i].map((x) => <span key={x}>{x}</span>)}
           </div>
         ))}
+      </div>
+      <div className="card"><h5>Meera N. · touchpoints</h5>
+        <div className="steps-mini">
+          {touch.map(([l, when], i) => <div key={l}><i className={i < t ? 'done' : i === t ? 'cur' : undefined} /><span>{l}</span><span className="pill p-mute">{when}</span></div>)}
+        </div>
       </div>
       <div className="sent"><span key={t} className={`pill ${t === 4 ? 'p-ok' : 'p-blue'} pop`}>{t === 4 ? '✓ Meera N. added to patients · no re-entry' : `Meera N. moved to ${STAGES[t]}`}</span></div>
     </div>
@@ -375,7 +447,7 @@ export const FEATURE_SCREENS = {
   billing: { title: 'Billing', body: BillingScreen },
   corporate: { title: 'Corporate partners · Nimbus Technologies', body: CorporateScreen },
   tenancy: { title: 'Platform · Workspaces', body: () => <div className="app-main"><TenancyDiagram /></div> },
-  leadflow: { title: 'LeadFlow · Pipeline', body: LeadFlowScreen },
+  leadflow: { title: 'Lead management · Pipeline', body: LeadFlowScreen },
 };
 
 /* ---------- Consultation page: the ten-step workflow, played in order on one screen ---------- */
@@ -459,7 +531,16 @@ export function WorkflowScreen() {
       </ol>
       <div className="app-main">
         <div className="app-top"><div><h4>Consultation · Arjun M.</h4><small>Step {t + 1} of {WF_STEPS.length} · {WF_STEPS[t]}</small></div><span className="pill p-ok"><i className="dot" />In progress</span></div>
-        <div key={t} className="fade" style={{ display: 'grid', gap: 12 }}><Panel /></div>
+        <div className="card wf-patient">
+          <span className="wf-av">AM</span>
+          <div><b>Arjun M. · 32 M</b><small>Booked online · first visit · Token #7</small></div>
+          <div className="wf-vitals"><span>BP <b>122/80</b></span><span>Temp <b>100.8°F</b></span><span>SpO2 <b>98%</b></span></div>
+        </div>
+        <div key={t} className="fade wf-panel"><Panel /></div>
+        <div className="wf-progress" aria-hidden="true">
+          <div className="wf-bar"><i style={{ width: `${((t + 1) / WF_STEPS.length) * 100}%` }} /></div>
+          <small>{t + 1 < WF_STEPS.length ? <>Next: <b>{WF_STEPS[t + 1]}</b></> : <b>Visit complete · reminders scheduled</b>}</small>
+        </div>
       </div>
     </div>
   );

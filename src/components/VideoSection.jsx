@@ -93,13 +93,13 @@ export default function VideoSection({ head = true, chapters = true, cta }) {
               <p className="kicker">In this demo</p>
               {chapterList}
               <p className="video-meta"><Icon name="clock" size={14} /> About a minute · one patient visit, start to finish</p>
-              {cta && <div className="cta-row" style={{ marginTop: 22 }}><SiteLink className="btn btn-ghost" href={cta.href}>{cta.label}</SiteLink></div>}
+              {cta && <div className="cta-row sec-cta"><SiteLink className="btn btn-ghost" href={cta.href}>{cta.label}</SiteLink></div>}
             </div>
           )}
         </div>
         {!portrait && chapterList}
         {note && <p className="video-note" role="status">{note}</p>}
-        {!portrait && cta && <div className="cta-row" style={{ marginTop: 26 }}><SiteLink className="btn btn-ghost" href={cta.href}>{cta.label}</SiteLink></div>}
+        {!portrait && cta && <div className="cta-row sec-cta"><SiteLink className="btn btn-ghost" href={cta.href}>{cta.label}</SiteLink></div>}
       </div>
     </section>
   );

@@ -8,7 +8,7 @@ import { FinalCTA } from '../components/Footer.jsx';
 const RELATED = {
   'Appointments and the OPD queue': { href: '/features#appointments', label: 'Appointments and queue features' },
   'Consultation and prescriptions': { href: '/for-doctors', label: 'For doctors: the consultation workflow' },
-  'WhatsApp and PyZap': { href: '/features#pyzap', label: 'PyZap in detail' },
+  'WhatsApp': { href: '/features#pyzap', label: 'WhatsApp engagement in detail' },
   'Billing and corporate healthcare': { href: '/features#billing', label: 'Billing and corporate B2B features' },
   'Platform': { href: '/features#multi-location', label: 'Multi-location architecture' },
 };
@@ -19,20 +19,16 @@ export default function FaqPage() {
   return (
     <>
       <Seo path="/faq" jsonLd={faqSchema(all)} />
-      <PageHero kicker={FAQ_PAGE.kicker} h1={FAQ_PAGE.h1} lead={FAQ_PAGE.lead}>
-        <ul className="subnav" aria-label="FAQ topics">
-          {groups.map((g, i) => <li key={g.title}><a href={`#faq-group-${i}`}>{g.title}</a></li>)}
-        </ul>
-      </PageHero>
-      {groups.map((g, i) => (
-        <section key={g.title} className="sec faq-group" id={`faq-group-${i}`} aria-labelledby={`h-fg-${i}`}>
-          <div className="wrap">
-            <h2 id={`h-fg-${i}`} className="h3 faq-title">{g.title}</h2>
-            <FaqList items={g.items} openFirst={i === 0} />
-            {RELATED[g.title] && <p className="faq-rel"><SiteLink href={RELATED[g.title].href} className="more">{RELATED[g.title].label} →</SiteLink></p>}
-          </div>
-        </section>
-      ))}
+      <div className="faq-pagebg" aria-hidden="true" />
+      <PageHero kicker={FAQ_PAGE.kicker} h1={FAQ_PAGE.h1} lead={FAQ_PAGE.lead} />
+      <section className="sec tight faq-onbg" id="faq-list" aria-label="Questions and answers">
+        <div className="wrap">
+          <FaqList groups={groups} search tools />
+          <ul className="faqx-related" aria-label="Related pages">
+            {Object.entries(RELATED).map(([t, r]) => <li key={t}><SiteLink href={r.href}>{r.label} →</SiteLink></li>)}
+          </ul>
+        </div>
+      </section>
       <FinalCTA title="Still have a question?" text="Ask it on a demo call. We'll answer with the product open." secondary={{ href: '/demo-video', label: 'Watch Demo First' }} />
     </>
   );

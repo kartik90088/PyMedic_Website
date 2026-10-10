@@ -18,14 +18,15 @@ export default function App() {
           <Route path="/for-doctors" element={<Consultation />} />
           <Route path="/features" element={<Features />} />
           <Route path="/for-patients" element={<ForPatients />} />
-          <Route path="/for-your-team" element={<ForYourTeam />} />
+          <Route path="/for-admin-team" element={<ForYourTeam />} />
           <Route path="/demo-video" element={<DemoVideo />} />
           <Route path="/faq" element={<FaqPage />} />
           <Route path="/book-demo" element={<BookDemo />} />
           {/* Old URLs */}
           <Route path="/consultation" element={<Navigate to="/for-doctors" replace />} />
           <Route path="/patients" element={<Navigate to="/for-patients" replace />} />
-          <Route path="/team" element={<Navigate to="/for-your-team" replace />} />
+          <Route path="/team" element={<Navigate to="/for-admin-team" replace />} />
+          <Route path="/for-your-team" element={<Navigate to="/for-admin-team" replace />} />
           <Route path="/contact" element={<Navigate to="/book-demo" replace />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>

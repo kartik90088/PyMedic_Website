@@ -6,7 +6,7 @@ import SiteLink from './SiteLink.jsx';
 /** Closing call-to-action. Copy is passed per page so no two pages repeat it. */
 export function FinalCTA({ title, text, primary = { href: '/book-demo', label: 'Book a Demo' }, secondary }) {
   return (
-    <section className="wrap" aria-labelledby="h-final" style={{ marginTop: 'clamp(64px,8vw,104px)' }}>
+    <section className="wrap final-wrap" aria-labelledby="h-final">
       <div className="final">
         <MarkTile />
         <div>

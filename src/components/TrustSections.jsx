@@ -26,7 +26,7 @@ export function Tenancy({ cta }) {
 
 export function Trust() {
   return (
-    <section className="sec" id="security" aria-labelledby="h-sec" style={{ paddingTop: 0 }}>
+    <section className="sec tight" id="security" aria-labelledby="h-sec">
       <div className="wrap">
         <SectionHead id="h-sec" kicker={TRUST.kicker} title={TRUST.title} accent={TRUST.accent} />
         <div className="t-list four">

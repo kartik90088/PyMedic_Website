@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { PATIENTS_PAGE as P } from '../content/site.js';
 import Seo from '../components/Seo.jsx';
 import PageHero from '../components/PageHero.jsx';
@@ -6,10 +7,12 @@ import StepList from '../components/StepList.jsx';
 import Icon from '../components/Icon.jsx';
 import SiteLink from '../components/SiteLink.jsx';
 import Photo from '../components/Photo.jsx';
+import FlowCards from '../components/FlowCards.jsx';
 import ProductScreenshot from '../components/ProductScreenshot.jsx';
 import { FinalCTA } from '../components/Footer.jsx';
 
 export default function ForPatients() {
+  const [step, setStep] = useState(0);
   return (
     <>
       <Seo path="/for-patients" />
@@ -46,9 +49,16 @@ export default function ForPatients() {
       <section className="sec" id="patient-journey" aria-labelledby="h-pj" style={{ background: 'var(--white)', borderBlock: '1px solid var(--line)' }}>
         <div className="wrap">
           <SectionHead id="h-pj" kicker="The patient journey" title="Nine steps," accent="none of them a phone call to the desk." />
-          <div className="prob-grid">
-            <Photo id="patients-journey" ratio="2 / 3" />
-            <StepList steps={P.journey} cols={2} />
+          <div className="prob-grid journey-grid">
+            <div className="prob-photo journey-photo" aria-live="polite">
+              {P.journeyImages.map((im, i) => (
+                <figure key={im.src} className={`photo prob-img${i === step ? ' on' : ''}`} aria-hidden={i !== step}>
+                  <img src={im.src} alt={i === step ? im.alt : ''} width="800" height="1200" loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+                </figure>
+              ))}
+              <div className="prob-cap" key={step}><b>{String(step + 1).padStart(2, '0')} · {P.journey[step][0]}</b><span>{P.journey[step][1]}</span></div>
+            </div>
+            <StepList steps={P.journey} cols={2} onActive={setStep} />
           </div>
         </div>
       </section>
@@ -56,12 +66,8 @@ export default function ForPatients() {
       <section className="sec" id="patient-highlights" aria-labelledby="h-ph">
         <div className="wrap">
           <SectionHead id="h-ph" kicker={P.highlights.kicker} title={P.highlights.title} accent={P.highlights.accent} />
-          <div className="outs five">
-            {P.highlights.items.map((h) => (
-              <article key={h.title} className="out"><span className="ico"><Icon name={h.icon} size={20} /></span><h3>{h.title}</h3><p>{h.text}</p></article>
-            ))}
-          </div>
-          <p style={{ marginTop: 28 }}><SiteLink href={P.next.href} className="more">{P.next.label} →</SiteLink></p>
+          <FlowCards items={P.highlights.items} />
+          <p className="sec-cta"><SiteLink href={P.next.href} className="more">{P.next.label} →</SiteLink></p>
         </div>
       </section>
 

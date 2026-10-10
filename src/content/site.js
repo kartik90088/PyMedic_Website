@@ -4,7 +4,7 @@
 export const SITE_CONFIG = {
   domain: 'https://www.pymedic.in',
   // YouTube / Vimeo link or an MP4 path, e.g. "https://www.youtube.com/watch?v=XXXX" or "/media/pymedic-demo.mp4"
-  video: '/media/pymedic-demo-landscape.mp4',
+  video: '/media/pymedic-demo-gemini.mp4',
   videoPoster: '/media/pymedic-demo-poster.jpg', // still frame shown before the preview starts
   videoCaptions: '', // optional .vtt file for MP4
   videoAspect: '16 / 9', // shape of the MP4 frame before it loads (the real ratio is read from the file)
@@ -31,22 +31,23 @@ export const SITE_CONFIG = {
 
 /** One-sentence entity definition, reused in structured data and the footer. */
 export const ENTITY =
-  'PyMedic is a hospital and clinic practice management system by VeriRight Management Solutions Pvt. Ltd. It connects appointments, OPD queue management, consultation and EMR, digital prescriptions, WhatsApp patient engagement (PyZap), surgery counselling, billing, corporate healthcare billing, LeadFlow enquiry tracking and patient follow-up on one platform.';
+  'PyMedic is a hospital and clinic practice management system by VeriRight Management Solutions Pvt. Ltd. It connects appointments, OPD queue management, consultation and EMR, digital prescriptions, WhatsApp patient engagement, surgery counselling, billing, corporate healthcare billing, Lead management enquiry tracking and patient follow-up on one platform.';
 
 export const NAV = [
+  { href: '/', label: 'Home' },
   { href: '/for-doctors', label: 'For Doctors' },
   { href: '/features', label: 'Features' },
   { href: '/for-patients', label: 'For Patients' },
-  { href: '/for-your-team', label: 'For Your Team' },
-  { href: '/demo-video', label: 'Demo Video' },
+  { href: '/for-admin-team', label: 'For Admin Team' },
+  // { href: '/demo-video', label: 'Demo Video' }, // hidden from the menu; the page still exists at /demo-video
   { href: '/faq', label: 'FAQ' },
 ];
 
 /** Per-page SEO. Keys match route paths. */
 export const SEO = {
   '/': {
-    title: 'Hospital & Clinic Practice Management Software | PyMedic',
-    description: 'PyMedic is hospital and clinic practice management software that connects appointments, OPD queues, consultation and EMR, prescriptions, WhatsApp patient engagement, billing and follow-up in one platform.',
+    title: 'Clinic & Patient Management Software | PyMedic',
+    description: 'PyMedic is clinic and patient management software for clinics and hospitals: appointments, OPD queues, consultation and EMR, prescriptions, WhatsApp patient engagement, billing and follow-up in one platform.',
     ogTitle: 'PyMedic · One connected platform for the complete patient journey',
     ogDescription: 'Appointments, OPD queue, consultation, prescriptions, WhatsApp, billing and follow-up, connected in one hospital and clinic management platform.',
   },
@@ -59,7 +60,7 @@ export const SEO = {
   },
   '/features': {
     title: 'Hospital Management Software Features | PyMedic',
-    description: "Explore PyMedic's clinic and hospital management software features by workflow: appointments, OPD queue, consultation and EMR, prescriptions, diagnostics, surgery counselling, PyZap WhatsApp, billing, corporate B2B, LeadFlow and multi-location architecture.",
+    description: "Explore PyMedic's clinic and hospital management software features by workflow: appointments, OPD queue, consultation and EMR, prescriptions, diagnostics, surgery counselling, WhatsApp, billing, corporate B2B, Lead management and multi-location architecture.",
     ogTitle: 'PyMedic Features · Every workflow around the visit',
     ogDescription: 'Eleven connected capabilities, organised the way a patient visit actually happens.',
     crumb: 'Features',
@@ -71,12 +72,12 @@ export const SEO = {
     ogDescription: 'Booking, queue position, prescriptions and reminders, all on WhatsApp.',
     crumb: 'For Patients',
   },
-  '/for-your-team': {
-    title: 'Healthcare Practice Management Software for Admins, Doctors & Front Desk | PyMedic',
+  '/for-admin-team': {
+    title: 'For Admin Team: Clinic & Hospital Admin Software | PyMedic',
     description: 'What hospital admins, doctors, front-desk coordinators and business teams get from PyMedic: doctor schedules, OPD queue, consultation tools, counselling cases, corporate billing and enquiry tracking.',
-    ogTitle: 'PyMedic for Your Team · Every role sees what it owns',
+    ogTitle: 'PyMedic for Admin Team · Every role sees what it owns',
     ogDescription: 'Hospital admins, doctors, front desk and business teams on one connected platform.',
-    crumb: 'For Your Team',
+    crumb: 'For Admin Team',
   },
   '/demo-video': {
     title: 'Hospital Management Software Demo Video | PyMedic',
@@ -117,10 +118,15 @@ export const PHOTOS = {
 /* ------------------------------------------------------------------ HOME */
 
 export const HERO = {
-  kicker: 'Hospital & clinic practice management software',
-  titleStart: 'Practice management software built around',
-  titleEmphasis: 'the complete patient journey.',
+  kicker: 'Clinic & patient management software',
+  titleStart: 'Scheduling, records and patient engagement.',
+  titleEmphasis: 'One connected platform.',
   lead: 'PyMedic connects appointments, OPD queues, consultations, EMR, prescriptions, WhatsApp patient engagement, billing and follow-up in one healthcare management platform. Nothing is re-entered, and nothing is lost between steps.',
+  // Display helpers for the hero. The full `lead` above stays in the page for search engines and screen readers.
+  keywords: ['Scheduling', 'records', 'patient engagement'],
+  rotate: ['appointments', 'OPD queues', 'consultations', 'EMR', 'prescriptions', 'WhatsApp patient engagement', 'billing', 'follow-up'],
+  rotateLine: ['PyMedic connects', 'in one healthcare management platform.'],
+  promises: ['Nothing is re-entered', 'Nothing is lost between steps'],
   primary: { href: '/book-demo', label: 'Book a Demo' },
   secondary: { href: '#journey', label: 'See How PyMedic Works' },
   points: [
@@ -130,12 +136,12 @@ export const HERO = {
   ],
 };
 
-export const CAPABILITIES = ['Appointments', 'Queue management', 'Consultation & EMR', 'WhatsApp engagement', 'Billing', 'Follow-up'];
+export const CAPABILITIES = ['Appointments', 'Queue management', 'Consultation & EMR', 'WhatsApp engagement', 'Reminders', 'AI support', 'Billing', 'Follow-up'];
 
 export const PROBLEM = {
   title: 'Healthcare operations break down when every workflow',
   accent: 'lives somewhere else.',
-  lead: 'A single visit touches eight different jobs. In most clinics, each one runs on its own tool, its own paper, or someone\'s memory.',
+  lead: 'A single patient visit spans scheduling, the OPD queue, consultation, prescriptions, billing and follow-up. In most clinics, each of these runs on a separate tool, paper register or manual process.',
   items: [
     ['Appointments', 'in a diary or a phone line nobody else can see'],
     ['The OPD queue', 'run on paper tokens and a crowded lobby'],
@@ -146,6 +152,17 @@ export const PROBLEM = {
     ['Follow-ups', 'left to the patient to remember'],
     ['Enquiries', 'tracked in a separate sheet, if tracked at all'],
   ],
+  // One photo per card above (same order). Clicking a card swaps the photo.
+  images: [
+    { src: '/photos/problem-1.jpg', alt: 'An open paper appointment diary on a desk' },
+    { src: '/photos/problem-2.jpg', alt: 'Patients waiting on benches along a crowded hospital corridor' },
+    { src: '/photos/problem-3.jpg', alt: 'A doctor writing consultation notes by hand on a clipboard while the patient waits' },
+    { src: '/photos/problem-4.jpg', alt: 'A doctor writing a prescription by hand next to a stethoscope' },
+    { src: '/photos/problem-5.jpg', alt: 'Hands texting a patient from a personal smartphone' },
+    { src: '/photos/problem-6.jpg', alt: 'A calculator and pens on a handwritten paper ledger' },
+    { src: '/photos/problem-7.jpg', alt: 'A patient picking tablets from a weekly pill organiser, remembering their own medicines' },
+    { src: '/photos/problem-8.jpg', alt: 'A staff member taking an enquiry by phone at a computer' },
+  ],
   bridgeTitle: 'PyMedic connects the workflow.',
   bridgeText: 'Every one of these steps happens inside the same platform, in the order the visit happens. When one step is completed, the next one is already waiting.',
 };
@@ -154,15 +171,19 @@ export const JOURNEY = {
   kicker: 'The PyMedic difference',
   title: 'One patient journey.',
   accent: 'One connected platform.',
-  lead: 'Each stage of the visit is handled by a PyMedic module, and each module hands over to the next one automatically.',
+  lead: 'Eleven steps, each one handing over to the next automatically.',
   stages: [
-    { stage: 'Book', module: 'Appointment booking', text: 'The patient picks a doctor, date and slot. The booking is tagged by source.' },
-    { stage: 'Check in', module: 'Patient check-in', text: 'A token is issued at the front desk or at the self-service kiosk.' },
-    { stage: 'Wait', module: 'Queue management', text: 'The waiting-room screen and a WhatsApp link show their place in line.' },
-    { stage: 'Consult', module: 'Consultation & EMR', text: 'The doctor presses Call Next, records the visit by voice and enters vitals.' },
-    { stage: 'Prescribe', module: 'Digital prescription', text: 'Medicines, packs and test panels become a signed PDF on WhatsApp.' },
-    { stage: 'Pay', module: 'Billing & payments', text: 'Consultation, diagnostic and pharmacy invoices are created as services are delivered.' },
-    { stage: 'Follow up', module: 'Patient follow-up', text: 'Reminders go out on Day 3, 7 and 14 with a link to book the next visit.' },
+    { stage: 'Book', icon: 'cal', module: 'Appointment booking', text: 'Pick a doctor, date and slot online.' },
+    { stage: 'Check in', icon: 'desk', module: 'Patient check-in', text: 'Get a token at the desk or kiosk.' },
+    { stage: 'Wait', icon: 'clock', module: 'Queue management', text: 'Track your turn on screen and WhatsApp.' },
+    { stage: 'Consult', icon: 'steth', module: 'Consultation & EMR', text: 'Notes recorded by voice, vitals on screen.' },
+    { stage: 'Prescribe', icon: 'rx', module: 'Digital prescription', text: 'A signed PDF, sent on WhatsApp.' },
+    { stage: 'Pay', icon: 'bill', module: 'Billing & payments', text: 'Invoices created as care is delivered.' },
+    { stage: 'Medicines', icon: 'pill', module: 'Pharmacy & dispensing', text: 'Dispensed at the clinic pharmacy.' },
+    { stage: 'Follow up', icon: 'chat', module: 'Patient follow-up', text: 'Check-ins on Day 3, 7 and 14.' },
+    { stage: 'Reminder', icon: 'bell', module: 'Reminder tracking', text: 'Every reminder tracked until booked.' },
+    { stage: 'Manage', icon: 'build', module: 'Clinic management', text: 'All branches on one dashboard.' },
+    { stage: 'Assist', icon: 'spark', module: 'AI support', text: 'AI suggestions; the doctor decides.' },
   ],
 };
 
@@ -172,8 +193,11 @@ export const MODULES = [
   { n: '02', icon: 'queue', title: 'Live Token Queue & Kiosk', text: 'Digital tokens, a waiting-room display and a queue link on the patient\'s phone. The doctor presses Call Next.', href: '/features#queue', cta: 'Explore the OPD queue' },
   { n: '03', icon: 'rx', title: 'Digital Consultation, Prescription & EMR', text: 'Voice-recorded notes, vitals, medicine packs and test panels, ending in a signed PDF on the patient record.', href: '/for-doctors', cta: "See the doctor's workflow" },
   { n: '04', icon: 'heart', title: 'Surgery Counselling Desk', text: 'One tick on the prescription opens a counselling case with costs, insurance pre-authorisation and the patient\'s decision.', href: '/features#surgery', cta: 'Explore surgery counselling' },
-  { n: '05', icon: 'chat', title: 'PyZap: WhatsApp Patient Engagement', text: 'Confirmations, prescription delivery, follow-up sequences and two-way chat, from the clinic\'s number, inside PyMedic.', href: '/features#pyzap', cta: 'Explore PyZap' },
+  { n: '05', icon: 'chat', title: 'WhatsApp Patient Engagement', text: 'Confirmations, prescription delivery, follow-up sequences and two-way chat, from the clinic\'s number, inside PyMedic.', href: '/features#pyzap', cta: 'Explore WhatsApp engagement' },
   { n: '06', icon: 'bill', title: 'Billing & Corporate B2B', text: 'Three invoice series, corporate partners with credit limits and monthly settlement, coupons and online payment.', href: '/features#billing', cta: 'Explore billing' },
+  { n: '07', icon: 'bell', title: 'Reminders & Follow-up Tracking', text: 'Medicine, test and follow-up reminders on WhatsApp, with each one tracked from sent to booked so no patient drops off.', href: '/features#pyzap', cta: 'Explore reminders' },
+  { n: '08', icon: 'branch', title: 'Clinic & Multi-branch Management', text: 'Doctors, schedules, branches, revenue and patient flow on one admin dashboard, with every clinic keeping its own data.', href: '/features#multi-location', cta: 'Explore clinic management' },
+  { n: '09', icon: 'mic', title: 'AI Support for Doctors', text: 'Speech-to-text consultation notes and AI suggestions on the prescription, with the doctor always making the final call.', href: '/for-doctors', cta: 'See AI support in the workflow' },
 ];
 
 export const CONSULT_HIGHLIGHT = {
@@ -185,10 +209,10 @@ export const CONSULT_HIGHLIGHT = {
 };
 
 export const PYZAP = {
-  kicker: 'PyZap · WhatsApp engagement',
+  kicker: 'WhatsApp engagement',
   title: 'Talk to patients',
   accent: 'where they already are.',
-  lead: 'PyZap is PyMedic\'s WhatsApp engine. It uses the WhatsApp Business API with pre-approved message templates, so the clinic can reach patients outside a live conversation.',
+  lead: 'PyMedic has WhatsApp built in. It uses the WhatsApp Business API with pre-approved message templates, so the clinic can reach patients outside a live conversation.',
   types: [
     { icon: 'cal', title: 'Confirmations and alerts', text: 'Doctor, date, time, token number and a live queue link, sent the moment a booking is made.' },
     { icon: 'rx', title: 'Prescription and report delivery', text: 'The PDF prescription with a visit summary, the tests ordered and the follow-up date.' },
@@ -215,10 +239,10 @@ export const BILLING = {
 };
 
 export const LEADFLOW = {
-  kicker: 'LeadFlow',
-  title: 'From healthcare enquiry',
+  kicker: 'Lead management',
+  title: 'From first enquiry',
   accent: 'to patient.',
-  lead: 'LeadFlow is the business-growth layer inside PyMedic, for the team that brings in new patients and corporate partners.',
+  lead: 'Lead management is the business-growth layer inside PyMedic, for the team that brings in new patients and corporate partners.',
   sources: ['Website form', 'WhatsApp', 'Phone call', 'Walk-in'],
   stages: ['New', 'Contacted', 'Interested', 'Negotiation', 'Converted'],
   points: [
@@ -249,7 +273,7 @@ export const DATA_FLOW = {
     ['Patient checked in', 'Queue link shows their live position'],
     ['Doctor starts consultation', 'Status moves to In progress; start time recorded'],
     ['Prescription generated', 'Signed PDF saved to the patient record'],
-    ['PyZap delivers the prescription', 'With tests ordered and the follow-up date'],
+    ['WhatsApp delivers the prescription', 'With tests ordered and the follow-up date'],
     ['Billing created', 'Consultation, diagnostic or pharmacy invoice, or billed to the corporate partner'],
     ['Follow-up triggered', 'Day 3, 7 and 14 reminders with a booking link'],
   ],
@@ -304,6 +328,26 @@ export const ABDM = {
 
 /* ------------------------------------------------------------ CONSULTATION */
 
+/** For Doctors: ABDM integration. Status is 'coming soon' until it ships; change `soon` to false then. */
+export const DOCTOR_ABDM = {
+  soon: true,
+  badge: 'ABDM integration · coming soon',
+  title: 'ABDM integration.',
+  accent: 'Prescriptions that follow the patient.',
+  lead: 'PyMedic is adding Ayushman Bharat Digital Mission (ABDM) integration, so the records you create can travel with the patient beyond your clinic.',
+  points: [
+    { icon: 'desk', title: 'Link to ABHA', text: "Consultation and prescription records linked to the patient's ABHA (Ayushman Bharat Health Account), with their consent." },
+    { icon: 'globe', title: 'Records travel with the patient', text: 'Other ABDM-connected providers can see the history the patient chooses to share.' },
+    { icon: 'check', title: 'No extra steps for the doctor', text: 'Linking happens in the background when you press Complete.' },
+  ],
+  flow: [
+    { icon: 'rx', title: 'Prescription completed', text: 'The doctor presses Complete; the record is ready to share.' },
+    { icon: 'check', title: 'Patient consent', text: 'The patient approves sharing on their phone.' },
+    { icon: 'desk', title: 'Linked to ABHA', text: "The record joins the patient's ABHA health record." },
+  ],
+  cta: { href: '/book-demo', label: 'Ask about ABDM on a demo' },
+};
+
 export const CONSULTATION_PAGE = {
   kicker: 'For doctors',
   h1: 'For doctors: more time with the patient, less time documenting the visit.',
@@ -319,8 +363,13 @@ export const CONSULTATION_PAGE = {
     ['Apply a medicine pack', 'Common conditions have a pre-built pack. One click adds all of its medicines.'],
     ['Order diagnostic tests', 'Pick individual tests or a test panel, such as a pre-surgery blood workup.'],
     ['Generate the prescription', 'A PDF on the clinic letterhead with your digital signature and a QR verification code.'],
-    ['Send the prescription', 'Delivered to the patient\'s WhatsApp and available in the patient portal.'],
+    ['Send the prescription', "Delivered to the patient's WhatsApp and available in the patient portal. Linking to the patient's ABHA through ABDM is coming soon."],
     ['Trigger what comes next', 'The consultation invoice is created, a counselling case opens if you ticked Surgery Suggested, and follow-up reminders are scheduled.'],
+  ],
+  workflowFacts: [
+    { icon: 'mic', title: 'No typing during the visit', text: 'The conversation becomes notes while you talk.' },
+    { icon: 'rx', title: 'One click for common cases', text: 'Medicine packs and test panels fill the prescription.' },
+    { icon: 'chat', title: 'Sent before the patient leaves', text: 'The signed PDF reaches WhatsApp the moment you press Complete.' },
   ],
   walkthrough: {
     kicker: 'On your screen',
@@ -339,6 +388,7 @@ export const CONSULTATION_PAGE = {
       ['Medicines', 'Written one by one, from memory', 'Searched from the database, or applied as a pack'],
       ['Tests', 'Listed by hand', 'Ordered as a panel in one click'],
       ['Prescription', 'Paper, handed over', 'Signed PDF with QR code, on WhatsApp and in the portal'],
+      ['Health record', 'Stays in the clinic\'s own files', 'Linked to the patient\'s ABHA through ABDM (coming soon)'],
       ['After the visit', 'Depends on someone remembering', 'Invoice, counselling case and reminders created automatically'],
     ],
   },
@@ -347,7 +397,7 @@ export const CONSULTATION_PAGE = {
     title: 'Three things happen',
     accent: 'without another click.',
     items: [
-      { icon: 'chat', title: 'The prescription is delivered', text: 'PyZap sends the PDF to the patient on WhatsApp.' },
+      { icon: 'chat', title: 'The prescription is delivered', text: 'The PDF is sent to the patient on WhatsApp.' },
       { icon: 'heart', title: 'A counselling case opens', text: 'If Surgery Suggested is ticked, the case is assigned to your counsellor.' },
       { icon: 'bill', title: 'The invoice is created', text: 'A CONS- series invoice for the consultation fee.' },
     ],
@@ -356,6 +406,7 @@ export const CONSULTATION_PAGE = {
     { q: 'Which vitals can be recorded during a consultation?', a: 'Blood pressure, pulse, temperature, oxygen saturation (SpO2), respiratory rate, height and weight. PyMedic calculates BMI from height and weight.' },
     { q: 'What is a Medicine Pack?', a: 'A pre-configured set of medicines for a common condition, built by your clinic admin. Applying a pack adds all of its medicines to the prescription in one click. Test Panels work the same way for diagnostic tests.' },
     { q: 'Where is the consultation stored?', a: "Notes, vitals, medicines, tests and the prescription PDF are saved to the patient's record in PyMedic, and the prescription is also available in the patient portal." },
+    { q: 'Does PyMedic integrate with ABDM?', a: "ABDM integration is coming soon. It will let doctors link consultation and prescription records to the patient's ABHA (Ayushman Bharat Health Account), with the patient's consent, so the record can follow the patient across ABDM-connected providers. Ask on a demo call for the current timeline." },
   ],
   next: { href: '/features', label: 'See every PyMedic feature' },
 };
@@ -367,7 +418,7 @@ export const FEATURES_PAGE = {
   h1: 'Every workflow around the visit, in one clinic and hospital management platform.',
   lead: 'Organised the way a patient visit actually happens: from the booking to the bill, and on to the next visit.',
   primary: { href: '/book-demo', label: 'Book a Demo' },
-  secondary: { href: '/for-your-team', label: 'See it by role' },
+  secondary: { href: '/for-admin-team', label: 'See it by role' },
 };
 
 export const ORBIT = {
@@ -375,6 +426,14 @@ export const ORBIT = {
   title: 'Every module.',
   accent: 'One PyMedic.',
   lead: 'Every capability on this page runs on the same platform and the same patient record. Select a module to jump back to its section.',
+  // Capabilities described elsewhere on the site that are not separate sections on this page.
+  extra: [
+    { name: 'Reminders', icon: 'bell', href: '#pyzap', ring: 'inner' },
+    { name: 'AI support', icon: 'spark', href: '/for-doctors', ring: 'inner' },
+    { name: 'Pharmacy', icon: 'pill', href: '#billing' },
+    { name: 'Patient portal', icon: 'desk', href: '/for-patients' },
+    { name: 'ABDM', icon: 'globe', href: '/for-doctors#abdm', soon: true },
+  ],
 };
 
 // `screen` keys map to FEATURE_SCREENS in components/mocks/Screens.jsx
@@ -403,8 +462,8 @@ export const FEATURE_SECTIONS = [
     text: 'The doctor ticks Surgery Suggested on the prescription. PyMedic creates a counselling case and assigns it to the clinic\'s counsellor.',
     bullets: ['Risks discussion recorded', 'Package options: room, surgeon, anaesthesia, tests and the out-of-pocket total', 'Insurance pre-authorisation tracked: Applied, Approved, Rejected', 'Patient decision: Proceed, Considering or Declined'],
     benefit: 'No recommendation leaves the building without an owner.' },
-  { id: 'pyzap', icon: 'chat', name: 'PyZap (WhatsApp)', screen: 'whatsapp', title: 'The clinic\'s WhatsApp, inside PyMedic.',
-    text: 'PyZap sends automated confirmations, prescriptions and reminders through the WhatsApp Business API using pre-approved templates, and gives staff an inbox for replies.',
+  { id: 'pyzap', icon: 'chat', name: 'WhatsApp', screen: 'whatsapp', title: 'The clinic\'s WhatsApp, inside PyMedic.',
+    text: 'PyMedic sends automated confirmations, prescriptions and reminders through the WhatsApp Business API using pre-approved templates, and gives staff an inbox for replies.',
     bullets: ['Templates: health checkup promotion, appointment confirmed, prescription delivered, follow-up reminder', 'Follow-up sequences on Day 3, 7 and 14', 'Two-way chat from the PyMedic inbox, not personal phones', 'Number selection: doctor\'s number, then clinic number, then platform number', 'Credentials encrypted with AES-256'],
     benefit: 'Every message has a sender the clinic controls and a record the clinic keeps.' },
   { id: 'billing', icon: 'bill', name: 'Billing', screen: 'billing', title: 'Three invoice series, generated as care is delivered.',
@@ -415,8 +474,8 @@ export const FEATURE_SECTIONS = [
     text: 'Corporate partners are set up with agreed discounts, a monthly credit limit and a point of contact. Their employees\' bills go to the company.',
     bullets: ['Patient marked as corporate at booking or walk-in', 'Invoice billed to the company; patient pays nothing or a co-pay', 'Consolidated invoice at month end', 'Admin alerted as the credit limit approaches'],
     benefit: 'Corporate tie-ups without a separate spreadsheet.' },
-  { id: 'leadflow', icon: 'funnel', name: 'LeadFlow', screen: 'leadflow', title: 'Enquiries become leads. Leads become patients.',
-    text: 'LeadFlow gives the marketing and business-development team a pipeline for enquiries from the website, WhatsApp, phone and walk-ins.',
+  { id: 'leadflow', icon: 'funnel', name: 'Lead management', screen: 'leadflow', title: 'Enquiries become leads. Leads become patients.',
+    text: 'PyMedic gives the marketing and business-development team a pipeline for enquiries from the website, WhatsApp, phone and walk-ins.',
     bullets: ['Stages: New, Contacted, Interested, Negotiation, Converted or Lost', 'Every call, email, message and meeting logged as a touchpoint', 'Converted leads flow into the patient database without re-entry', 'Corporate partnership leads tracked in the same pipeline'],
     benefit: 'The team that brings patients in works on the same platform as the team that treats them.' },
   { id: 'multi-location', icon: 'branch', name: 'Multi-location architecture', screen: 'tenancy', title: 'Many clinics, one platform, separate data.',
@@ -459,6 +518,18 @@ export const PATIENTS_PAGE = {
     ['Pay', 'Consultation, test and pharmacy bills, payable online or covered by an employer.'],
     ['Follow up', 'Reminders on Day 3, 7 and 14, with a one-tap link to book the next visit.'],
   ],
+  // One photo per journey step, same order; all cropped to 800x1200 (2:3) so they fill the frame exactly.
+  journeyImages: [
+    { src: '/photos/step-1.jpg', alt: 'A patient on her phone browsing a list of doctors' },
+    { src: '/photos/step-2.jpg', alt: 'Hands booking an appointment slot in a phone app' },
+    { src: '/photos/step-3.jpg', alt: 'A patient reading a confirmation message on her phone' },
+    { src: '/photos/step-4.jpg', alt: 'A clinic reception desk where patients check in' },
+    { src: '/photos/step-5.jpg', alt: 'Patients waiting in a hospital corridor for their turn' },
+    { src: '/photos/step-6.jpg', alt: 'A doctor with a tablet talking with a patient during a consultation' },
+    { src: '/photos/step-7.jpg', alt: 'A pharmacist explaining prescribed medicine to a patient' },
+    { src: '/photos/step-8.jpg', alt: 'A patient paying the bill with a phone at a card reader' },
+    { src: '/photos/step-9.jpg', alt: 'A patient taking tablets from a weekly pill organiser after a reminder' },
+  ],
   highlights: {
     kicker: 'What patients notice',
     title: 'Fewer questions at the desk.',
@@ -478,7 +549,7 @@ export const PATIENTS_PAGE = {
 /* ---------------------------------------------------------- FOR YOUR TEAM */
 
 export const TEAM_PAGE = {
-  kicker: 'For your team',
+  kicker: 'For admin team',
   h1: 'Every role sees the part of the visit it owns.',
   lead: 'PyMedic is role-based. Hospital admins, doctors, front-desk coordinators and business teams each get their own view of the same connected record.',
   primary: { href: '/book-demo', label: 'Book a Demo' },
@@ -495,7 +566,7 @@ export const TEAM_PAGE = {
       items: ['Walk-in registration with the next available slot', 'Token kiosk and check-in', 'Corporate patient tagging at the desk', 'Counselling cases created by the doctor\'s tick', 'Risks, package costs and the patient\'s decision recorded', 'Insurance pre-authorisation status'] },
     { id: 'business', icon: 'funnel', title: 'Business & marketing teams', sub: 'Growth, partnerships and campaigns', screen: 'leadflow',
       lead: 'Enquiries, campaigns and partners on the same platform as the clinic.',
-      items: ['Health checkup promotions sent through PyZap', 'Leads from website, WhatsApp, phone and walk-ins', 'Pipeline stages from New to Converted', 'Touchpoints logged for every interaction', 'Converted leads become patients without re-entry'] },
+      items: ['Health checkup promotions sent on WhatsApp', 'Leads from website, WhatsApp, phone and walk-ins', 'Pipeline stages from New to Converted', 'Touchpoints logged for every interaction', 'Converted leads become patients without re-entry'] },
   ],
   groups: {
     kicker: 'Multi-branch groups',
@@ -540,7 +611,7 @@ export const FAQ_PAGE = {
 
 export const FAQ_GROUPS = [
   { title: 'About PyMedic', items: [
-    { id: 'what', q: 'What is PyMedic?', a: 'PyMedic is a hospital and clinic practice management system from VeriRight Management Solutions Pvt. Ltd. It handles appointments, the OPD token queue, consultation notes and EMR, digital prescriptions, surgery counselling, WhatsApp patient engagement through PyZap, billing with corporate accounts, and enquiry tracking through LeadFlow, on one connected platform.' },
+    { id: 'what', q: 'What is PyMedic?', a: 'PyMedic is a hospital and clinic practice management system from VeriRight Management Solutions Pvt. Ltd. It handles appointments, the OPD token queue, consultation notes and EMR, digital prescriptions, surgery counselling, WhatsApp patient engagement through billing with corporate accounts, and enquiry tracking through Lead management, on one connected platform.' },
     { id: 'who', q: 'Who can use PyMedic?', a: 'Individual doctors, clinics, multi-speciality hospitals and multi-branch groups. Inside an organisation, hospital admins, doctors, front-desk staff and counsellors each have their own role-based view, and patients interact through the booking page and WhatsApp.' },
     { id: 'clinics', q: 'Is PyMedic suitable for a single clinic?', a: 'Yes. A clinic sets up its profile, doctors and hours, connects a WhatsApp number and starts booking. The queue, consultation, prescription, billing and follow-up modules work the same way at one branch as at many.' },
     { id: 'hospitals', q: 'Is PyMedic suitable for hospitals?', a: 'Yes. Hospitals use the OPD queue across several doctors and rooms, the surgery counselling desk with insurance pre-authorisation, three separate invoice series for GST and audit, corporate B2B accounts, and multi-branch management from one admin view.' },
@@ -555,8 +626,8 @@ export const FAQ_GROUPS = [
     { id: 'prescriptions', q: 'How does PyMedic support digital prescriptions?', a: 'Medicines are picked from the master database, individually or as a Medicine Pack, and tests individually or as a Test Panel. On Complete, PyMedic produces a PDF on the clinic letterhead with the doctor\'s digital signature and a QR verification code, sends it to the patient on WhatsApp and stores it in the patient portal.' },
     { id: 'surgery', q: 'What happens when a doctor recommends surgery?', a: 'A Surgery Suggested tick on the prescription is enough. PyMedic creates a counselling case for the front-desk counsellor, who records the risks discussion, shows package costs, tracks insurance pre-authorisation and records whether the patient will proceed, is considering, or has declined.' },
   ] },
-  { title: 'WhatsApp and PyZap', items: [
-    { id: 'pyzap', q: 'How does PyZap work?', a: 'PyZap is the WhatsApp engine inside PyMedic. It sends automated confirmations, prescription PDFs and follow-up reminders through the WhatsApp Business API using pre-approved message templates, and it gives doctors and staff an inbox for two-way chat with patients.' },
+  { title: 'WhatsApp', items: [
+    { id: 'pyzap', q: 'How does WhatsApp messaging work in PyMedic?', a: 'WhatsApp is built into PyMedic. It sends automated confirmations, prescription PDFs and follow-up reminders through the WhatsApp Business API using pre-approved message templates, and it gives doctors and staff an inbox for two-way chat with patients.' },
     { id: 'number', q: 'Whose WhatsApp number do patients see?', a: "The doctor's own number if one is configured, otherwise the clinic's official number, otherwise the platform's default number. Each number's WhatsApp credentials are held under AES-256 encryption and are never visible to another clinic." },
     { id: 'app', q: 'Do patients need to install an app?', a: 'No. Confirmations, queue links, prescriptions and reminders arrive on WhatsApp, and the prescription is also available in the web patient portal.' },
   ] },
@@ -566,7 +637,7 @@ export const FAQ_GROUPS = [
   ] },
   { title: 'Platform', items: [
     { id: 'multi', q: 'Can PyMedic support multiple clinics or branches?', a: "Yes. PyMedic is multi-tenant: the medicine database, test catalogue, WhatsApp gateway and payments are shared, while each clinic's patients, doctors, slots, invoices, WhatsApp credentials, partners and coupons are isolated. Admins manage several branches and owners see them on one dashboard." },
-    { id: 'leadflow', q: 'What is LeadFlow?', a: 'LeadFlow is the enquiry and lead pipeline inside PyMedic for marketing and business-development teams. Enquiries from the website, WhatsApp, phone and walk-ins become leads, move through New, Contacted, Interested, Negotiation and Converted or Lost, and converted leads become patients or corporate partners without re-entry.' },
+    { id: 'leadflow', q: 'How does PyMedic track enquiries and leads?', a: 'PyMedic has an enquiry and lead pipeline inside PyMedic for marketing and business-development teams. Enquiries from the website, WhatsApp, phone and walk-ins become leads, move through New, Contacted, Interested, Negotiation and Converted or Lost, and converted leads become patients or corporate partners without re-entry.' },
     { id: 'data', q: 'Who can see our clinic\'s data?', a: 'Only your organisation. Clinic data is isolated from every other clinic on the platform, access inside the clinic is by role, and WhatsApp credentials are encrypted.' },
   ] },
 ];
@@ -598,8 +669,8 @@ export const START_STEPS = [
 /* ------------------------------------------------------------------- FOOTER */
 
 export const FOOTER = [
-  { title: 'Product', links: [['/for-doctors', 'For doctors'], ['/features', 'Features'], ['/features#pyzap', 'PyZap WhatsApp'], ['/features#billing', 'Billing & corporate'], ['/features#leadflow', 'LeadFlow'], ['/features#multi-location', 'Multi-location']] },
-  { title: 'Company', links: [['/for-your-team', 'For your team'], ['/for-patients', 'For patients'], ['/demo-video', 'Demo video'], ['/faq', 'FAQ'], ['/book-demo', 'Book a demo'], ['/book-demo', 'Contact']] },
+  { title: 'Product', links: [['/for-doctors', 'For doctors'], ['/features', 'Features'], ['/features#pyzap', 'WhatsApp engagement'], ['/features#billing', 'Billing & corporate'], ['/features#leadflow', 'Lead management'], ['/features#multi-location', 'Multi-location']] },
+  { title: 'Company', links: [['/for-admin-team', 'For admin team'], ['/for-patients', 'For patients'], ['/demo-video', 'Demo video'], ['/faq', 'FAQ'], ['/book-demo', 'Book a demo'], ['/book-demo', 'Contact']] },
 ];
 
 export const LEGAL = [['#privacy', 'Privacy Policy'], ['#terms', 'Terms'], ['#cookies', 'Cookie Policy']];
