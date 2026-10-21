@@ -17,8 +17,7 @@ export const SITE_CONFIG = {
   email: 'info@pymedic.in',
   phone: '+91 00000 00000',
   offices: [
-    { title: 'Headquarters', lines: ['Address line 1', 'Address line 2', 'Bengaluru, Karnataka 5600XX'] },
-    { title: 'Regional office', lines: ['Address line 1', 'Address line 2', 'City, State PIN'] },
+    { title: 'Address', lines: ['C K Pearl, No. L-151, Fourth Floor', '14th Cross Road, 5th Main, 6th Sector', 'HSR Layout, Bengaluru – 560102'] },
   ],
   // Social profiles: leave `href` empty to hide an icon.
   social: [
@@ -37,6 +36,8 @@ export const NAV = [
   { href: '/', label: 'Home' },
   { href: '/for-doctors', label: 'For Doctors' },
   { href: '/features', label: 'Features' },
+  { href: '/hospitals', label: 'Hospitals' },
+  { href: '/diagnostic-centre', label: 'Diagnostic Centre' },
   { href: '/for-patients', label: 'For Patients' },
   { href: '/for-admin-team', label: 'For Admin Team' },
   // { href: '/demo-video', label: 'Demo Video' }, // hidden from the menu; the page still exists at /demo-video
@@ -71,6 +72,20 @@ export const SEO = {
     ogTitle: 'PyMedic for Patients · Informed from booking to follow-up',
     ogDescription: 'Booking, queue position, prescriptions and reminders, all on WhatsApp.',
     crumb: 'For Patients',
+  },
+  '/hospitals': {
+    title: 'Hospital Management Software: Connect Patient Flow | PyMedic',
+    description: 'PyMedic connects appointment scheduling, OPD queues, consultation workflows, digital prescriptions, patient communication, billing and follow-ups for hospitals in one practice management platform.',
+    ogTitle: 'PyMedic for Hospitals · Connect patient flow across your hospital operations',
+    ogDescription: 'Appointments, OPD queues, consultations, prescriptions, WhatsApp, billing and follow-ups in one connected platform.',
+    crumb: 'Hospitals',
+  },
+  '/diagnostic-centre': {
+    title: 'Diagnostic Centre Management Software | PyMedic',
+    description: 'PyMedic helps diagnostic centres coordinate patient appointments, diagnostic test orders, patient communication and billing within one connected practice management platform.',
+    ogTitle: 'PyMedic for Diagnostic Centres · Appointments, test workflows and billing, closer together',
+    ogDescription: 'Patient appointments, diagnostic test orders, WhatsApp communication and diagnostic billing in one connected platform.',
+    crumb: 'Diagnostic Centre',
   },
   '/for-admin-team': {
     title: 'For Admin Team: Clinic & Hospital Admin Software | PyMedic',
@@ -193,7 +208,7 @@ export const MODULES = [
   { n: '02', icon: 'queue', title: 'Live Token Queue & Kiosk', text: 'Digital tokens, a waiting-room display and a queue link on the patient\'s phone. The doctor presses Call Next.', href: '/features#queue', cta: 'Explore the OPD queue' },
   { n: '03', icon: 'rx', title: 'Digital Consultation, Prescription & EMR', text: 'Voice-recorded notes, vitals, medicine packs and test panels, ending in a signed PDF on the patient record.', href: '/for-doctors', cta: "See the doctor's workflow" },
   { n: '04', icon: 'heart', title: 'Surgery Counselling Desk', text: 'One tick on the prescription opens a counselling case with costs, insurance pre-authorisation and the patient\'s decision.', href: '/features#surgery', cta: 'Explore surgery counselling' },
-  { n: '05', icon: 'chat', title: 'WhatsApp Patient Engagement', text: 'Confirmations, prescription delivery, follow-up sequences and two-way chat, from the clinic\'s number, inside PyMedic.', href: '/features#pyzap', cta: 'Explore WhatsApp engagement' },
+  { n: '05', icon: 'chat', title: 'WhatsApp and AI Calling Patient Engagement', text: 'Confirmations, prescription delivery, follow-up sequences and two-way chat on WhatsApp, with AI calls to confirm and remind patients.', href: '/features#pyzap', cta: 'Explore WhatsApp engagement' },
   { n: '06', icon: 'bill', title: 'Billing & Corporate B2B', text: 'Three invoice series, corporate partners with credit limits and monthly settlement, coupons and online payment.', href: '/features#billing', cta: 'Explore billing' },
   { n: '07', icon: 'bell', title: 'Reminders & Follow-up Tracking', text: 'Medicine, test and follow-up reminders on WhatsApp, with each one tracked from sent to booked so no patient drops off.', href: '/features#pyzap', cta: 'Explore reminders' },
   { n: '08', icon: 'branch', title: 'Clinic & Multi-branch Management', text: 'Doctors, schedules, branches, revenue and patient flow on one admin dashboard, with every clinic keeping its own data.', href: '/features#multi-location', cta: 'Explore clinic management' },
@@ -409,6 +424,145 @@ export const CONSULTATION_PAGE = {
     { q: 'Does PyMedic integrate with ABDM?', a: "ABDM integration is coming soon. It will let doctors link consultation and prescription records to the patient's ABHA (Ayushman Bharat Health Account), with the patient's consent, so the record can follow the patient across ABDM-connected providers. Ask on a demo call for the current timeline." },
   ],
   next: { href: '/features', label: 'See every PyMedic feature' },
+};
+
+/* ---------------------------------------------------------------- HOSPITALS */
+
+export const HOSPITALS_PAGE = {
+  kicker: 'PyMedic for hospitals',
+  h1: 'Connect patient flow across your hospital operations.',
+  lead: [
+    'PyMedic brings appointment scheduling, OPD queues, consultation workflows, digital prescriptions, patient communication, billing and follow-ups into one connected practice management platform.',
+    'Help your administrative teams, doctors and front-desk staff coordinate each stage of the patient journey through structured digital workflows.',
+  ],
+  primary: { href: '/book-demo', label: 'Book a Demo' },
+  secondary: { href: '/features', label: 'Explore PyMedic' },
+  connected: {
+    title: 'Hospital operations should work',
+    accent: 'as one connected system.',
+    text: 'From appointment booking to consultation, billing and follow-up, every stage of a hospital visit depends on information created by another team. When these processes operate separately, coordinating patient movement and keeping everyone informed becomes more difficult.',
+    bridge: 'PyMedic connects supported operational workflows to help your teams manage the patient journey with greater structure and visibility.',
+  },
+  workflows: {
+    title: "Built around your hospital's",
+    accent: 'daily workflows.',
+    items: [
+      { icon: 'cal', title: 'Appointment & scheduling management', text: 'Organize doctor availability, consultation slots, online bookings, walk-ins, referrals and follow-up appointments through a structured scheduling workflow.' },
+      { icon: 'queue', title: 'OPD & queue management', text: 'Manage patient check-ins and digital tokens, display waiting-room queues, provide mobile queue information and allow doctors to call the next patient.' },
+      { icon: 'steth', title: 'Digital consultation & EMR workflows', text: 'Connect appointments with consultation notes, vital signs, medicines, diagnostic test orders and digital prescription generation.' },
+      { icon: 'chat', title: 'Patient communication through WhatsApp', text: 'Use supported WhatsApp workflows for appointment confirmations, queue updates, prescription delivery and configured follow-up communication.' },
+      { icon: 'bill', title: 'Billing & corporate patient management', text: 'Generate consultation, diagnostic and pharmacy invoices. Organize corporate partners, agreed pricing, credit limits and settlement workflows.' },
+      { icon: 'heart', title: 'Surgery counselling & patient coordination', text: 'Create a counselling case when a doctor recommends surgery. Track procedure discussions, cost information, insurance pre-authorization status and patient decisions.' },
+      { icon: 'funnel', title: 'Lead & business development management', text: 'Use lead management to capture inquiries, track interactions, manage pipeline stages and convert qualified leads into patient records.' },
+      { icon: 'branch', title: 'Multi-location operations', text: 'Manage branch information and doctor schedules while maintaining clinic-level data separation. Confirm the exact configuration required for your hospital group.' },
+    ],
+  },
+  teams: {
+    title: 'Support the teams behind',
+    accent: 'every patient visit.',
+    items: [
+      { icon: 'build', title: 'Hospital administrators', text: 'Coordinate supported operational and billing workflows.' },
+      { icon: 'steth', title: 'Doctors', text: 'Access appointment lists, document consultations and generate prescriptions.' },
+      { icon: 'desk', title: 'Front-desk teams', text: 'Register walk-ins, manage check-ins and coordinate queues.' },
+      { icon: 'heart', title: 'Patient coordinators', text: 'Track surgery counselling cases and follow-ups.' },
+      { icon: 'funnel', title: 'Business development teams', text: 'Organize inquiries and corporate opportunities.' },
+    ],
+  },
+  flow: {
+    title: 'How PyMedic connects',
+    accent: 'the patient journey.',
+    lead: 'Each stage builds on the previous one, helping teams manage the operational journey without treating every step as an isolated task.',
+    items: [
+      { icon: 'cal', title: 'Book' },
+      { icon: 'chat', title: 'Confirm' },
+      { icon: 'desk', title: 'Check in' },
+      { icon: 'queue', title: 'Queue' },
+      { icon: 'steth', title: 'Consult' },
+      { icon: 'rx', title: 'Prescribe' },
+      { icon: 'bill', title: 'Bill' },
+      { icon: 'bell', title: 'Follow up' },
+    ],
+  },
+  faq: [
+    { q: 'What is hospital management software?', a: 'Hospital management software helps organize administrative and patient-facing workflows such as appointments, patient registration, OPD operations, consultation documentation, billing and communication.' },
+    { q: 'How does PyMedic support OPD management?', a: 'PyMedic supports appointment scheduling, patient check-in, digital tokens, waiting-room queue displays, mobile queue tracking and a doctor-facing Call Next workflow.' },
+    { q: 'Can PyMedic manage corporate patients?', a: 'PyMedic supports corporate partner configuration, agreed pricing, credit limits, corporate billing and settlement workflows.' },
+    { q: 'Does PyMedic support multiple hospital locations?', a: 'PyMedic documents multi-location and multi-tenant capabilities. Specific branch structures, user permissions and cross-location workflows should be confirmed during implementation.' },
+    { q: 'Can PyMedic replace a complete hospital information system (HIS)?', a: 'PyMedic documents practice-management, OPD, consultation, prescription and billing workflows. A complete HIS replacement should not be assumed without verifying inpatient management, bed allocation, pharmacy inventory, laboratory integrations and other hospital-specific requirements.' },
+  ],
+  final: {
+    title: 'Bring your hospital workflows into one connected view.',
+    text: "Explore how PyMedic can support your hospital's appointment, OPD, consultation, billing and patient communication workflows.",
+    primary: { href: '/book-demo', label: 'Book a Demo' },
+    secondary: { href: '/book-demo', label: 'Talk to Our Team' },
+  },
+};
+
+/* ------------------------------------------------------- DIAGNOSTIC CENTRE */
+
+export const DIAGNOSTIC_PAGE = {
+  kicker: 'PyMedic for diagnostic centres',
+  h1: 'Bring diagnostic appointments, test workflows and billing closer together.',
+  lead: [
+    'PyMedic supports documented diagnostic workflows within a connected practice management platform, helping diagnostic centres coordinate patient appointments, diagnostic test orders, patient communication and billing.',
+    'Organize key operational steps around the patient journey, from booking and registration to diagnostic services, relevant billing and follow-up communication.',
+  ],
+  primary: { href: '/book-demo', label: 'Book a Demo' },
+  secondary: { href: '/features', label: 'Explore PyMedic' },
+  simplify: {
+    title: 'Simplify the operational side',
+    accent: 'of diagnostic services.',
+    text: 'Diagnostic centres manage multiple touchpoints, including patient enquiries, appointment coordination, test orders, billing and communication. When these activities are handled through disconnected processes, teams may need to repeat information and coordinate each step manually.',
+    bridge: 'PyMedic brings supported appointment, diagnostic ordering, communication and billing workflows into a connected operational environment.',
+  },
+  workflows: {
+    title: 'Designed around key',
+    accent: 'diagnostic centre workflows.',
+    items: [
+      { icon: 'cal', title: 'Patient appointments & registration', text: 'Organize available appointment slots, online bookings, walk-ins and patient registration through the supported scheduling workflow.' },
+      { icon: 'clock', title: 'Diagnostic test orders', text: 'Connect diagnostic test orders to the consultation workflow. PyMedic documents diagnostic test selection, test panels and diagnostic order support.' },
+      { icon: 'bill', title: 'Diagnostic billing', text: "Generate diagnostic invoices alongside the platform's other documented invoice types. Support relevant corporate billing arrangements where configured." },
+      { icon: 'chat', title: 'Patient communication', text: 'Use supported WhatsApp workflows for appointment confirmations, relevant patient updates and follow-up communication.' },
+      { icon: 'rx', title: 'Prescription & consultation coordination', text: 'Where a diagnostic test is ordered during a consultation, connect that step with the documented consultation and prescription workflow.' },
+      { icon: 'bell', title: 'Patient follow-up', text: 'Use configured communication sequences and follow-up appointments where applicable to maintain continuity after the visit.' },
+    ],
+  },
+  flow: {
+    title: 'Keep important operational steps',
+    accent: 'connected.',
+    lead: 'The exact workflow depends on how your diagnostic centre operates and which PyMedic capabilities are configured for your use case.',
+    items: [
+      { icon: 'cal', title: 'Appointment' },
+      { icon: 'desk', title: 'Registration' },
+      { icon: 'clock', title: 'Test order' },
+      { icon: 'bill', title: 'Billing' },
+      { icon: 'chat', title: 'Patient communication' },
+      { icon: 'bell', title: 'Follow-up' },
+    ],
+  },
+  who: {
+    title: 'Who can',
+    accent: 'benefit?',
+    items: [
+      { icon: 'build', title: 'Independent diagnostic centres', text: 'Coordinating patient appointments and billing.' },
+      { icon: 'steth', title: 'Diagnostics alongside clinics', text: 'Diagnostic services operating alongside clinics or consultation practices.' },
+      { icon: 'bill', title: 'Consultation + diagnostics', text: 'Healthcare organizations managing both consultation and diagnostic invoice workflows.' },
+      { icon: 'branch', title: 'Multi-location organizations', text: 'Evaluating connected patient and administrative operations.' },
+    ],
+  },
+  faq: [
+    { q: 'What is diagnostic centre management software?', a: 'Diagnostic centre management software helps organize operational activities such as patient registration, appointments, test orders, billing and patient communication. The specific functions available depend on the software platform.' },
+    { q: 'Can PyMedic support diagnostic test orders?', a: 'Yes. PyMedic documents diagnostic test selection and ordering within its consultation and prescription workflow, including test panels.' },
+    { q: 'Does PyMedic support diagnostic billing?', a: 'Yes. Diagnostic invoices are one of the documented invoice streams in PyMedic, alongside consultation and pharmacy invoices.' },
+    { q: 'Can PyMedic automatically generate laboratory reports?', a: 'Automated laboratory report generation and result-processing capabilities need to be confirmed. They should not be presented as available features until the product team verifies them.' },
+    { q: 'Does PyMedic include a laboratory information management system (LIMS/LIS)?', a: 'A dedicated LIS/LIMS, sample collection and tracking, analyser integration, laboratory result validation and automated report generation are not established by the current product documentation. Confirm these requirements with the PyMedic team before making integration or capability claims.' },
+  ],
+  final: {
+    title: 'Explore a connected workflow for your diagnostic centre.',
+    text: 'Discuss your appointment, diagnostic ordering, billing and communication requirements with the PyMedic team to understand which workflows are supported.',
+    primary: { href: '/book-demo', label: 'Book a Demo' },
+    secondary: { href: '/book-demo', label: 'Talk to Our Team' },
+  },
 };
 
 /* ---------------------------------------------------------------- FEATURES */
@@ -670,7 +824,7 @@ export const START_STEPS = [
 
 export const FOOTER = [
   { title: 'Product', links: [['/for-doctors', 'For doctors'], ['/features', 'Features'], ['/features#pyzap', 'WhatsApp engagement'], ['/features#billing', 'Billing & corporate'], ['/features#leadflow', 'Lead management'], ['/features#multi-location', 'Multi-location']] },
-  { title: 'Company', links: [['/for-admin-team', 'For admin team'], ['/for-patients', 'For patients'], ['/demo-video', 'Demo video'], ['/faq', 'FAQ'], ['/book-demo', 'Book a demo'], ['/book-demo', 'Contact']] },
+  { title: 'Company', links: [['/hospitals', 'Hospitals'], ['/diagnostic-centre', 'Diagnostic centres'], ['/for-admin-team', 'For admin team'], ['/for-patients', 'For patients'], ['/demo-video', 'Demo video'], ['/faq', 'FAQ'], ['/book-demo', 'Book a demo'], ['/book-demo', 'Contact']] },
 ];
 
 export const LEGAL = [['#privacy', 'Privacy Policy'], ['#terms', 'Terms'], ['#cookies', 'Cookie Policy']];

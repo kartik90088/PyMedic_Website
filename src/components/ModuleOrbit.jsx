@@ -18,11 +18,11 @@ const ring = (items, r, offset = -90) =>
  * Platform map: every PyMedic module in orbit around the platform.
  * A highlight travels round the map, with a beam from the core to the active module. Hover takes over.
  */
-export default function ModuleOrbit() {
+export default function ModuleOrbit({ base = '', lead }) {
   const reduce = useReducedMotion();
   const HIDE = ['consultation', 'pyzap']; // shown elsewhere on the page; left off the map by request
-  const shown = FEATURE_SECTIONS.filter((f) => !HIDE.includes(f.id)).map((f) => ({ ...f, href: `#${f.id}` }));
-  const extra = ORBIT.extra || [];
+  const shown = FEATURE_SECTIONS.filter((f) => !HIDE.includes(f.id)).map((f) => ({ ...f, href: `${base}#${f.id}` }));
+  const extra = (ORBIT.extra || []).map((x) => ({ ...x, href: x.href.startsWith('#') ? `${base}${x.href}` : x.href }));
   const inner = ring([...shown.slice(0, 3), ...extra.filter((x) => x.ring === 'inner')], 26, -90);
   const outer = ring([...shown.slice(3), ...extra.filter((x) => x.ring !== 'inner')], 44, -75);
   const all = [...inner, ...outer];
@@ -39,7 +39,7 @@ export default function ModuleOrbit() {
   return (
     <section className="sec orbit-band" id="platform-map" aria-labelledby="h-orbit">
       <div className="wrap">
-        <SectionHead id="h-orbit" kicker={ORBIT.kicker} title={ORBIT.title} accent={ORBIT.accent} lead={ORBIT.lead} />
+        <SectionHead id="h-orbit" kicker={ORBIT.kicker} title={ORBIT.title} accent={ORBIT.accent} lead={lead || ORBIT.lead} />
         <div className="orbit" aria-label="PyMedic modules arranged around the platform">
           <div className="orbit-ring r1" aria-hidden="true" />
           <div className="orbit-ring r2" aria-hidden="true" />

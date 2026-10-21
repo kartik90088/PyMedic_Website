@@ -10,7 +10,7 @@ const SLIDES = [
   { short: 'My OPD', title: 'PyMedic · My OPD · Today', label: "Doctor's dashboard with today's appointments, the live OPD queue and a voice note" },
   { short: 'Booking', key: 'appointments', title: 'Book · Dr. Sharma · Tuesday', label: 'Appointment booking with doctor slots filling in real time' },
   { short: 'Queue', key: 'queue', title: 'Waiting room display', label: 'Waiting-room TV display showing the token each doctor is seeing' },
-  { short: 'WhatsApp', key: 'whatsapp', title: 'WhatsApp inbox', label: 'WhatsApp inbox with patient messages and the follow-up sequence' },
+  { short: 'Customer appointments', key: 'customer', title: 'Customer appointments · WhatsApp & AI calling', label: 'Customer appointments confirmed over WhatsApp and AI calls' },
   { short: 'Billing', key: 'billing', title: 'Billing', label: 'Billing with consultation, diagnostic and pharmacy invoices and a corporate credit meter' },
 ];
 

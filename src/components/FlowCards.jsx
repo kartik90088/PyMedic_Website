@@ -39,7 +39,7 @@ export default function FlowCards({ items, every = 2000, cols }) {
             <span className="fc-n num">{String(i + 1).padStart(2, '0')}</span>
           </div>
           <h3>{it.title}</h3>
-          <p>{it.text}</p>
+          {it.text && <p>{it.text}</p>}
           {i < n - 1 && <span className="fc-link" aria-hidden="true"><i /></span>}
         </li>
       ))}

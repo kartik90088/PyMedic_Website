@@ -14,6 +14,7 @@ export default function DemoPopup({ at = 0.5, rearm = 0.35 }) {
   const armed = useRef(true);
   const closeRef = useRef(null);
   const openerRef = useRef(null);
+  const scrollRef = useRef(0); // where the visitor was when the form opened
 
   useEffect(() => {
     if (done) return;
@@ -25,6 +26,7 @@ export default function DemoPopup({ at = 0.5, rearm = 0.35 }) {
       if (armed.current && pos >= at) {
         armed.current = false;
         openerRef.current = document.activeElement;
+        scrollRef.current = window.scrollY;
         setOpen(true);
       }
     };
@@ -35,14 +37,20 @@ export default function DemoPopup({ at = 0.5, rearm = 0.35 }) {
 
   useEffect(() => {
     if (!open) return;
-    closeRef.current?.focus();
+    closeRef.current?.focus({ preventScroll: true });
     document.body.style.overflow = 'hidden';
     const onKey = (e) => { if (e.key === 'Escape') close(); };
     window.addEventListener('keydown', onKey);
     return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
   }, [open]);
 
-  const close = () => { setOpen(false); openerRef.current?.focus?.(); };
+  // Closing keeps the visitor exactly where they were: focus goes back without scrolling, and the position is restored.
+  const close = () => {
+    const y = scrollRef.current;
+    setOpen(false);
+    openerRef.current?.focus?.({ preventScroll: true });
+    requestAnimationFrame(() => window.scrollTo({ top: y, behavior: 'instant' }));
+  };
 
   if (!open) return null;
   return (
