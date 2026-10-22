@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { DEMO, SITE_CONFIG } from '../content/site.js';
 import { markUrl } from './Brand.jsx';
+import Icon from './Icon.jsx';
 
 const FIELDS = [
   { name: 'name', label: 'Full name', autoComplete: 'name', placeholder: 'Dr. Anjali Rao', error: 'Please enter your name.' },
@@ -113,6 +114,10 @@ export default function DemoForm({ heading: H = 'h2' }) {
           <ul className="expect">
             {DEMO.expect.map((x, i) => <li key={x}><span className="ico">{i + 1}</span><div>{x}</div></li>)}
           </ul>
+          <address className="demo-address">
+            <span className="ico"><Icon name="pin" size={16} /></span>
+            <div><b>Visit us</b>{SITE_CONFIG.offices[0].lines.map((l) => <span key={l}>{l}</span>)}</div>
+          </address>
         </div>
         <DemoFormFields />
       </div>

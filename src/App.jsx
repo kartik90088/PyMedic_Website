@@ -8,6 +8,8 @@ import ForYourTeam from './pages/ForYourTeam.jsx';
 import DemoVideo from './pages/DemoVideo.jsx';
 import FaqPage from './pages/FaqPage.jsx';
 import BookDemo from './pages/BookDemo.jsx';
+import Hospitals from './pages/Hospitals.jsx';
+import DiagnosticCentre from './pages/DiagnosticCentre.jsx';
 
 export default function App() {
   return (
@@ -17,6 +19,8 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/for-doctors" element={<Consultation />} />
           <Route path="/features" element={<Features />} />
+          <Route path="/hospitals" element={<Hospitals />} />
+          <Route path="/diagnostic-centre" element={<DiagnosticCentre />} />
           <Route path="/for-patients" element={<ForPatients />} />
           <Route path="/for-admin-team" element={<ForYourTeam />} />
           <Route path="/demo-video" element={<DemoVideo />} />

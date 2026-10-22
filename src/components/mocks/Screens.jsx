@@ -436,6 +436,46 @@ function LeadFlowScreen() {
   );
 }
 
+/* ---------- Customer appointments: WhatsApp on one side, AI calling on the other ---------- */
+const CALLS = [
+  ['Priya R.', 'Tue 10:40 · Dr. Sharma', 'Confirmed', 'p-ok'],
+  ['Arjun M.', 'Tue 11:00 · Dr. Sharma', 'Rescheduled to 11:20', 'p-blue'],
+  ['Meera N.', 'Wed 09:30 · Dr. Iyer', 'Reminder delivered', 'p-ok'],
+];
+function CustomerAppointmentsScreen() {
+  const t = useTick(4, 2400);
+  const live = CALLS[t % 3];
+  return (
+    <div className="app-main">
+      <div className="stats three">
+        <div className="card stat"><b key={`c${t}`} className="pop">{32 + t}</b><small>Appointments confirmed</small></div>
+        <div className="card stat"><b key={`w${t}`} className="pop">{21 + t}</b><small>via WhatsApp</small></div>
+        <div className="card stat"><b key={`a${t}`} className="pop">{11 + (t >> 1)}</b><small>via AI calls</small></div>
+      </div>
+      <div className="ca-split">
+        <div className="card ca-wa">
+          <h5><span className="ca-dot wa" />WhatsApp</h5>
+          <div className="bub">Appointment confirmed with Dr. Sharma, Tue 10:40 AM. Token #6.<small>9:02</small></div>
+          <div className="bub me">Thank you! I'll be there.<small>9:03 ✓✓</small></div>
+          <div key={t} className="bub pop">Reminder: your appointment is tomorrow at 10:40 AM.<small>Mon 18:00</small></div>
+        </div>
+        <div className="card ca-ai">
+          <h5><span className="ca-dot ai" />AI calling</h5>
+          <div className="ca-call">
+            <span className="ca-ring" aria-hidden="true"><Icon name="phone" size={18} /></span>
+            <div><b key={live[0]} className="pop">{live[0]}</b><small>{live[1]}</small></div>
+            <Wave bars={[10, 20, 14, 24, 12, 18]} />
+          </div>
+          <p className="ca-line" key={`l${t}`}>"Hi {live[0].split(' ')[0]}, this is City Care Clinic confirming your appointment. Press 1 to confirm."</p>
+          {CALLS.map(([n, when, st, tone], i) => (
+            <Row key={n} tok={i === t % 3 ? 'LIVE' : 'AI'} now={i === t % 3} name={n} sub={when} pill={i < t % 3 || t === 3 ? st : i === t % 3 ? 'Calling…' : 'Queued'} tone={i < t % 3 || t === 3 ? tone : i === t % 3 ? 'p-warn' : 'p-mute'} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export const FEATURE_SCREENS = {
   appointments: { title: 'Book · Dr. Sharma · Tuesday', body: AppointmentsScreen },
   queue: { title: 'Waiting room display', body: () => <div className="app-main"><Tv /></div> },
@@ -444,6 +484,7 @@ export const FEATURE_SCREENS = {
   diagnostics: { title: 'Tests · Priya R.', body: DiagnosticsScreen },
   surgery: { title: 'Counselling · Case C-21', body: SurgeryScreen },
   whatsapp: { title: 'WhatsApp inbox', body: WhatsAppScreen },
+  customer: { title: 'Customer appointments · WhatsApp & AI calling', body: CustomerAppointmentsScreen },
   billing: { title: 'Billing', body: BillingScreen },
   corporate: { title: 'Corporate partners · Nimbus Technologies', body: CorporateScreen },
   tenancy: { title: 'Platform · Workspaces', body: () => <div className="app-main"><TenancyDiagram /></div> },
